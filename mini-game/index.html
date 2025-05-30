@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Game: Guess the Number</title>
+  <script>
+    let rnd = Math.floor(Math.random()*10)+1;
+    function guess() {
+      const val = Number(document.getElementById('num').value);
+      const msg = val === rnd ? "Correct!" : "Try again!";
+      document.getElementById('result').textContent = msg;
+    }
+  </script>
+</head>
+<body>
+  <h1>Guess the Number (1-10)</h1>
+  <input id="num" type="number" min="1" max="10">
+  <button onclick="guess()">Guess</button>
+  <div id="result"></div>
+</body>
+</html>

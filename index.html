@@ -1,30 +1,32 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Trang Web Đơn Giản</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #f9f9f9; text-align: center; margin-top: 100px; }
-        input, button { padding: 8px; font-size: 16px; }
-        #greeting { margin-top: 20px; color: #2e8b57; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8">
+  <title>Mini App Gallery</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    h1 { color: #1e90ff; }
+    ul { line-height: 2; }
+    a { text-decoration: none; color: #1e90ff; }
+    a:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
-    <h1>Chào mừng bạn đến với trang web test!</h1>
-    <p>Nhập tên của bạn và nhấn nút để được chào nhé:</p>
-    <input type="text" id="nameInput" placeholder="Nhập tên của bạn">
-    <button onclick="sayHello()">Chào!</button>
-    <div id="greeting"></div>
-
-    <script>
-        function sayHello() {
-            const name = document.getElementById('nameInput').value.trim();
-            if (name) {
-                document.getElementById('greeting').textContent = `Xin chào, ${name}!`;
-            } else {
-                document.getElementById('greeting').textContent = 'Vui lòng nhập tên của bạn!';
-            }
-        }
-    </script>
+  <h1>Mini App Gallery</h1>
+  <ul>
+    <li><a href="portfolio/">Personal Portfolio</a></li>
+    <li><a href="blog/">Static Blog</a></li>
+    <li><a href="gallery/">Photo Gallery</a></li>
+    <li><a href="product-landing/">Product Landing Page</a></li>
+    <li><a href="contact-form/">Contact Form (EmailJS)</a></li>
+    <li><a href="cv-online/">Online CV</a></li>
+    <li><a href="countdown/">Countdown Timer</a></li>
+    <li><a href="todo-list/">To-do List</a></li>
+    <li><a href="resume-generator/">Resume Generator</a></li>
+    <li><a href="calculator/">Calculator/Converter</a></li>
+    <li><a href="mini-game/">Mini Game/Quiz</a></li>
+    <li><a href="faq/">FAQ / Product Guide</a></li>
+  </ul>
+  <footer style="margin-top:40px;">&copy; 2025 Mini App Gallery by linhluu98x</footer>
 </body>
 </html>

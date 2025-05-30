@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Countdown Timer</title>
+  <script>
+    let timer;
+    function startCountdown() {
+      const sec = parseInt(document.getElementById('seconds').value, 10);
+      let t = sec;
+      clearInterval(timer);
+      document.getElementById('count').textContent = t;
+      timer = setInterval(() => {
+        t--;
+        document.getElementById('count').textContent = t;
+        if (t <= 0) clearInterval(timer);
+      }, 1000);
+    }
+  </script>
+</head>
+<body>
+  <h1>Countdown Timer</h1>
+  <input id="seconds" type="number" placeholder="Seconds">
+  <button onclick="startCountdown()">Start</button>
+  <div id="count"></div>
+</body>
+</html>

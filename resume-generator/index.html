@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Generator</title>
+  <script>
+    function generateResume() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const result = `Name: ${name}\nEmail: ${email}`;
+      document.getElementById('output').textContent = result;
+    }
+  </script>
+</head>
+<body>
+  <h1>Resume Generator</h1>
+  <input id="name" placeholder="Name">
+  <input id="email" placeholder="Email">
+  <button onclick="generateResume()">Generate</button>
+  <pre id="output"></pre>
+</body>
+</html>
