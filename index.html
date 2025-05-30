@@ -2,17 +2,29 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Web Test</title>
+    <title>Trang Web Đơn Giản</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f2f2f2; text-align: center; margin-top: 50px; }
-        h1 { color: #0066cc; }
-        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        body { font-family: Arial, sans-serif; background: #f9f9f9; text-align: center; margin-top: 100px; }
+        input, button { padding: 8px; font-size: 16px; }
+        #greeting { margin-top: 20px; color: #2e8b57; font-weight: bold; }
     </style>
 </head>
 <body>
-    <h1>Chào mừng đến với trang web test!</h1>
-    <p>Đây là trang web mẫu để kiểm tra hoạt động của GitHub Pages.</p>
-    <button onclick="alert('Bạn đã bấm nút test!')">Test</button>
+    <h1>Chào mừng bạn đến với trang web test!</h1>
+    <p>Nhập tên của bạn và nhấn nút để được chào nhé:</p>
+    <input type="text" id="nameInput" placeholder="Nhập tên của bạn">
+    <button onclick="sayHello()">Chào!</button>
+    <div id="greeting"></div>
+
+    <script>
+        function sayHello() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (name) {
+                document.getElementById('greeting').textContent = `Xin chào, ${name}!`;
+            } else {
+                document.getElementById('greeting').textContent = 'Vui lòng nhập tên của bạn!';
+            }
+        }
+    </script>
 </body>
 </html>
