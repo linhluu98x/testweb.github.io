@@ -2,11 +2,11 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Nhắc việc, to-do list</title>
+  <title>To-do List - Life Suite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {background:#f5f6fa;font-family:'Segoe UI',Arial,sans-serif;}
-    .wrap{max-width:420px;margin:30px auto;background:#fff;border-radius:10px;box-shadow:0 2px 10px #0002;padding:24px 16px;}
+    body {background:#e3eafc;font-family:'Segoe UI',Arial,sans-serif;}
+    .wrap{max-width:420px;margin:30px auto;background:#fff;border-radius:11px;box-shadow:0 2px 10px #0002;padding:24px 16px;}
     h1{text-align:center;color:#e65100;}
     .form-row{display:flex;gap:8px;margin-bottom:10px;}
     .form-row input{flex:1;font-size:1em;padding:8px;border:1px solid #ccc;border-radius:5px;}
@@ -21,11 +21,14 @@
 <body>
   <div class="wrap">
     <h1>To-do List</h1>
-    <form id="form" class="form-row">
+    <form id="form" class="form-row" autocomplete="off">
       <input type="text" id="todo" placeholder="Việc cần làm..." required>
       <button type="submit">Thêm</button>
     </form>
     <ul id="list"></ul>
+    <div style="text-align:center;margin-top:32px;">
+      <a href="../" style="color:#1976d2;text-decoration:none;font-size:.99em;">&larr; Về trang chủ</a>
+    </div>
   </div>
   <script>
     function save(d){localStorage.setItem('todos',JSON.stringify(d));}

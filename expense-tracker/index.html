@@ -2,11 +2,11 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Quản lý chi tiêu cá nhân</title>
+  <title>Quản lý chi tiêu cá nhân - Life Suite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { margin:0; background:#f5f6fa; font-family: 'Segoe UI', Arial, sans-serif;}
-    .wrap { max-width:420px; margin:30px auto; background:#fff; border-radius:10px; box-shadow:0 2px 10px #0002; padding:24px 16px; }
+    body { margin:0; background:#e3eafc; font-family: 'Segoe UI', Arial, sans-serif;}
+    .wrap { max-width:420px; margin:30px auto; background:#fff; border-radius:11px; box-shadow:0 2px 10px #0002; padding:24px 16px; }
     h1 { text-align:center; color:#1976d2; }
     .form-row { display: flex; gap: 8px; margin-bottom: 10px;}
     .form-row input { flex:1; font-size:1em; padding:8px; border:1px solid #ccc; border-radius:5px;}
@@ -20,20 +20,23 @@
 </head>
 <body>
   <div class="wrap">
-    <h1>Chi tiêu cá nhân</h1>
-    <form id="form" class="form-row">
+    <h1>Quản lý chi tiêu</h1>
+    <form id="form" class="form-row" autocomplete="off">
       <input type="text" id="desc" placeholder="Mô tả" required>
       <input type="number" id="amount" placeholder="Số tiền" required>
       <button type="submit">Thêm</button>
     </form>
     <ul id="list"></ul>
     <div class="sum" id="total">Tổng: 0 đ</div>
+    <div style="text-align:center;margin-top:32px;">
+      <a href="../" style="color:#1976d2;text-decoration:none;font-size:.99em;">&larr; Về trang chủ</a>
+    </div>
   </div>
   <script>
     function save(data){localStorage.setItem('expenses',JSON.stringify(data));}
     function load(){return JSON.parse(localStorage.getItem('expenses')||'[]');}
     function render(){let d=load(),s=0;
-      list.innerHTML=d.map((x,i)=>`<li>${x.desc}<span>${x.amount.toLocaleString()} đ <a href="#" onclick="del(${i});return false;" title="Xóa">❌</a></span></li>`).join('');
+      list.innerHTML=d.map((x,i)=>`<li>${x.desc}<span>${parseInt(x.amount).toLocaleString()} đ <a href="#" onclick="del(${i});return false;" title="Xóa">❌</a></span></li>`).join('');
       d.forEach(x=>s+=+x.amount);
       total.textContent='Tổng: '+s.toLocaleString()+' đ';
     }

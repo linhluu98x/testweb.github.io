@@ -2,45 +2,71 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Life Utilities App Gallery</title>
+  <title>Life Suite - Ứng dụng hữu ích cho cuộc sống</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     html { box-sizing: border-box; }
     *, *:before, *:after { box-sizing: inherit; }
-    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f5f6fa; }
-    .container { max-width: 700px; margin: 0 auto; padding: 32px 12px; }
-    h1 { text-align: center; color: #1976d2; }
-    ul { list-style: none; padding: 0; }
-    li { background: #fff; margin: 12px 0; border-radius: 8px; box-shadow: 0 2px 8px #0001; }
-    a { display: block; padding: 20px; font-size: 1.1em; color: #1976d2; text-decoration: none; transition: background 0.2s; }
-    a:hover { background: #e3f2fd; }
-    @media (max-width: 600px) {
-      .container { padding: 16px 2vw; }
-      a { padding: 14px; font-size: 1em; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #e3eafc; margin:0; }
+    .container { max-width: 980px; margin: 0 auto; padding: 36px 14px 60px 14px;}
+    h1 { font-size:2.2em; color: #1976d2; text-align: center; margin-bottom: 0.2em;}
+    h2 { color: #333; font-size: 1.12em; margin: 0 0 0.2em 0; }
+    .desc {color:#555; font-size:1em; margin-bottom: 0.5em;}
+    .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 22px; margin-top:26px; }
+    .card { background: #fff; border-radius: 11px; box-shadow: 0 2px 12px #0001; padding: 18px 15px 16px 15px; transition:transform .16s; border:2px solid #f3f6fd;}
+    .card:hover { transform: translateY(-7px) scale(1.03); border-color: #1976d2; }
+    .card a { color: #1976d2; text-decoration: none; font-weight: bold; font-size:1.06em;}
+    .card a:after {content:" →"; font-weight: normal;}
+    @media (max-width:600px) {
+      .container { padding: 14px 2vw; }
+      .grid { gap: 10px; }
+      .card {padding: 10px 5px 12px 8px;}
     }
+    footer {margin-top:28px;text-align:center;color:#b6b6b6;font-size:.98em;}
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Life Utilities App Gallery</h1>
-    <ul>
-      <li><a href="pomodoro/">Lập kế hoạch Pomodoro</a></li>
-      <li><a href="quick-notes/">Ghi chú nhanh</a></li>
-      <li><a href="sleep-cycle/">Tính giờ ngủ khoa học</a></li>
-      <li><a href="expense-tracker/">Quản lý chi tiêu cá nhân</a></li>
-      <li><a href="habit-tracker/">Theo dõi thói quen</a></li>
-      <li><a href="simple-passwords/">Quản lý mật khẩu đơn giản</a></li>
-      <li><a href="calorie-log/">Nhật ký thực phẩm/Calories</a></li>
-      <li><a href="step-tracker/">Nhật ký bước chân</a></li>
-      <li><a href="countdown-timer/">Đồng hồ đếm ngược/Đặt giờ</a></li>
-      <li><a href="todo-list/">Nhắc việc, to-do list</a></li>
-      <li><a href="unit-converter/">Chuyển đổi đơn vị</a></li>
-      <li><a href="health-calculator/">Máy tính sức khỏe (BMI/BMR)</a></li>
-      <li><a href="qr-generator/">Tạo mã QR nhanh</a></li>
-      <li><a href="mood-tracker/">Theo dõi cảm xúc</a></li>
-      <li><a href="water-reminder/">Lịch nhắc uống nước</a></li>
-    </ul>
-    <footer style="margin-top:40px;text-align:center;color:#aaa;">&copy; 2025 Life Utilities by XXX</footer>
+    <h1>Life Suite</h1>
+    <div style="text-align:center;font-size:1.13em;color:#555;max-width:700px;margin:0 auto 16px auto;">
+      Bộ sưu tập ứng dụng nhỏ, miễn phí, tiện ích – tối ưu giao diện cho cả máy tính và điện thoại. Mọi dữ liệu lưu trên thiết bị cá nhân, an toàn & bảo mật.
+    </div>
+    <div class="grid">
+      <div class="card"><h2>Lưu trữ tài liệu quan trọng</h2><div class="desc">Lưu thông tin giấy tờ, hình ảnh quan trọng (offline/local).</div><a href="document-safe/">Truy cập</a></div>
+      <div class="card"><h2>Lập kế hoạch Pomodoro</h2><div class="desc">Chia nhỏ thời gian làm việc/học tập để tăng hiệu suất.</div><a href="pomodoro/">Truy cập</a></div>
+      <div class="card"><h2>Chuyển đổi múi giờ</h2><div class="desc">Đổi giờ giữa các quốc gia, giờ quốc tế và giờ VN.</div><a href="timezone-converter/">Truy cập</a></div>
+      <div class="card"><h2>Ghi chú nhanh</h2><div class="desc">Ghi chú ý tưởng, công việc hoặc thông tin quan trọng, lưu trữ ngay trên thiết bị.</div><a href="quick-notes/">Truy cập</a></div>
+      <div class="card"><h2>Tính giờ ngủ khoa học</h2><div class="desc">Tính toán giờ nên thức giấc hoặc đi ngủ hợp lý theo chu kỳ ngủ.</div><a href="sleep-cycle/">Truy cập</a></div>
+      <div class="card"><h2>Lịch/thời khóa biểu cá nhân</h2><div class="desc">Quản lý sự kiện, thời khóa biểu cá nhân, lịch học/làm việc.</div><a href="calendar/">Truy cập</a></div>
+      <div class="card"><h2>Quản lý chi tiêu cá nhân</h2><div class="desc">Theo dõi thu/chi, tổng kết và lưu lịch sử chi tiêu cá nhân.</div><a href="expense-tracker/">Truy cập</a></div>
+      <div class="card"><h2>Nhắc ngày đặc biệt</h2><div class="desc">Lưu ngày sinh nhật, kỷ niệm, nhắc trước ngày quan trọng.</div><a href="special-date-reminder/">Truy cập</a></div>
+      <div class="card"><h2>Nhắc uống thuốc</h2><div class="desc">Đặt lịch nhắc uống thuốc, nhắc lịch khám sức khỏe.</div><a href="medication-reminder/">Truy cập</a></div>
+      <div class="card"><h2>Theo dõi thói quen</h2><div class="desc">Tạo và đánh dấu các thói quen tích cực mỗi ngày.</div><a href="habit-tracker/">Truy cập</a></div>
+      <div class="card"><h2>Quản lý mật khẩu đơn giản</h2><div class="desc">Lưu trữ mật khẩu offline, chỉ lưu trên thiết bị cá nhân.</div><a href="simple-passwords/">Truy cập</a></div>
+      <div class="card"><h2>Nhật ký thực phẩm/Calories</h2><div class="desc">Nhập món ăn, lượng calo để quản lý chế độ ăn uống.</div><a href="calorie-log/">Truy cập</a></div>
+      <div class="card"><h2>Tính tuổi/ngày</h2><div class="desc">Nhập ngày sinh, tính tuổi hoặc đếm ngược đến ngày kỷ niệm.</div><a href="age-calculator/">Truy cập</a></div>
+      <div class="card"><h2>Đặt mục tiêu cá nhân</h2><div class="desc">Lập mục tiêu, checklist, đánh dấu hoàn thành.</div><a href="goal-setter/">Truy cập</a></div>
+      <div class="card"><h2>Tra cứu mã bưu điện</h2><div class="desc">Tìm mã bưu điện, mã vùng nhanh chóng.</div><a href="postal-lookup/">Truy cập</a></div>
+      <div class="card"><h2>Nhật ký bước chân</h2><div class="desc">Ghi lại số bước, thống kê vận động mỗi ngày.</div><a href="step-tracker/">Truy cập</a></div>
+      <div class="card"><h2>Nhật ký sách/phim</h2><div class="desc">Lưu lại sách đã đọc, phim đã xem, đánh giá, chia sẻ.</div><a href="book-movie-journal/">Truy cập</a></div>
+      <div class="card"><h2>Tạo mật khẩu mạnh</h2><div class="desc">Sinh mật khẩu ngẫu nhiên, an toàn.</div><a href="password-generator/">Truy cập</a></div>
+      <div class="card"><h2>Tính tiền tip/chia hóa đơn</h2><div class="desc">Tính tiền tip và chia hóa đơn cho nhóm.</div><a href="tip-split/">Truy cập</a></div>
+      <div class="card"><h2>Tỷ giá ngoại tệ</h2><div class="desc">Tra cứu tỷ giá USD, EUR, JPY, ... mới nhất.</div><a href="currency-rate/">Truy cập</a></div>
+      <div class="card"><h2>Danh sách mua sắm</h2><div class="desc">Lên danh sách các món cần mua, tích chọn khi đã mua.</div><a href="shopping-list/">Truy cập</a></div>
+      <div class="card"><h2>Đồng hồ bấm giờ</h2><div class="desc">Đo thời gian sự kiện, bấm giờ thể thao.</div><a href="stopwatch/">Truy cập</a></div>
+      <div class="card"><h2>Đồng hồ đếm ngược</h2><div class="desc">Đặt giờ đếm ngược cho các sự kiện, công việc, nấu ăn, tập luyện.</div><a href="countdown-timer/">Truy cập</a></div>
+      <div class="card"><h2>Đồng hồ thế giới</h2><div class="desc">Xem giờ các quốc gia lớn, tiện cho làm việc quốc tế.</div><a href="world-clock/">Truy cập</a></div>
+      <div class="card"><h2>Bảng chuyển đổi màu sắc</h2><div class="desc">Đổi mã màu HEX, RGB, HSL, xem bảng màu.</div><a href="color-converter/">Truy cập</a></div>
+      <div class="card"><h2>Nhắc việc, to-do list</h2><div class="desc">Lập danh sách việc cần làm, đánh dấu hoàn thành từng mục.</div><a href="todo-list/">Truy cập</a></div>
+      <div class="card"><h2>Ghi chú mã hóa</h2><div class="desc">Ghi chú bảo mật, chỉ ai có mật khẩu mới đọc được.</div><a href="encrypted-notes/">Truy cập</a></div>
+      <div class="card"><h2>Chuyển đổi đơn vị</h2><div class="desc">Đổi đơn vị chiều dài, khối lượng, nhiệt độ, ...</div><a href="unit-converter/">Truy cập</a></div>
+      <div class="card"><h2>Máy tính sức khỏe (BMI/BMR)</h2><div class="desc">Tính chỉ số BMI & BMR để theo dõi sức khỏe.</div><a href="health-calculator/">Truy cập</a></div>
+      <div class="card"><h2>Tạo mã QR nhanh</h2><div class="desc">Tạo mã QR từ văn bản hoặc liên kết để chia sẻ nhanh chóng.</div><a href="qr-generator/">Truy cập</a></div>
+      <div class="card"><h2>Theo dõi cảm xúc</h2><div class="desc">Đánh dấu cảm xúc mỗi ngày, tạo nhật ký tâm trạng.</div><a href="mood-tracker/">Truy cập</a></div>
+      <div class="card"><h2>Lịch nhắc uống nước</h2><div class="desc">Theo dõi và nhắc nhở uống nước đầy đủ mỗi ngày.</div><a href="water-reminder/">Truy cập</a></div>
+      <div class="card"><h2>Tính phí gửi hàng</h2><div class="desc">Tính chi phí gửi hàng nhanh, phù hợp bán hàng online.</div><a href="shipping-fee/">Truy cập</a></div>
+    </div>
+    <footer>&copy; 2025 Life Suite by linhluu98x</footer>
   </div>
 </body>
 </html>

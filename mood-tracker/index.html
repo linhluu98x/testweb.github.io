@@ -2,53 +2,25 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Theo dõi cảm xúc</title>
+  <title>Theo dõi cảm xúc - Life Suite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body{background:#f5f6fa;font-family:'Segoe UI',Arial,sans-serif;}
-    .wrap{max-width:420px;margin:30px auto;background:#fff;border-radius:10px;box-shadow:0 2px 10px #0002;padding:24px 16px;}
-    h1{text-align:center;color:#7b1fa2;}
-    .row{display:flex;gap:8px;margin:12px 0;}
-    select{flex:1;padding:8px;font-size:1em;border:1px solid #bbb;border-radius:5px;}
-    input{flex:2;padding:8px;font-size:1em;border:1px solid #bbb;border-radius:5px;}
-    button{background:#7b1fa2;color:#fff;padding:10px 28px;border:none;border-radius:7px;font-size:1em;}
-    button:hover{background:#4a148c;}
-    ul{margin-top:20px;}
-    li{font-size:1.1em;}
+    body {background:#e3eafc;font-family:'Segoe UI',Arial,sans-serif;margin:0;}
+    .wrap{max-width:430px;margin:30px auto;background:#fff;border-radius:15px;box-shadow:0 2px 15px #0002;padding:28px 16px;}
+    h1{text-align:center;color:#1976d2;font-size:1.38em;}
+    .desc{color:#555;text-align:center;margin-bottom:22px;}
+    .coming{color:#888;text-align:center;margin-top:35px;}
     @media(max-width:600px){.wrap{padding:9vw 2vw;}}
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>Theo dõi cảm xúc</h1>
-    <div class="row">
-      <select id="mood">
-        <option value="😄">Vui</option>
-        <option value="🙂">Bình thường</option>
-        <option value="😢">Buồn</option>
-        <option value="😠">Cáu</option>
-        <option value="😴">Mệt</option>
-        <option value="😍">Yêu đời</option>
-      </select>
-      <input id="note" placeholder="Ghi chú...">
-      <button onclick="add()">Lưu</button>
+    <div class="desc">Đánh dấu cảm xúc mỗi ngày, tạo nhật ký tâm trạng.</div>
+    <div class="coming">Tính năng này sẽ được bổ sung sớm!</div>
+    <div style="text-align:center;margin:35px 0 0 0;">
+      <a href="../" style="color:#1976d2;text-decoration:none;font-size:.99em;">&larr; Về trang chủ</a>
     </div>
-    <ul id="list"></ul>
   </div>
-  <script>
-    function save(d){localStorage.setItem('moods',JSON.stringify(d));}
-    function load(){return JSON.parse(localStorage.getItem('moods')||'[]');}
-    function render(){
-      let d=load();
-      list.innerHTML = d.map((x,i)=>`<li><b>${x.date}</b> ${x.mood} ${x.note?'- '+x.note:''} <a href="#" onclick="del(${i});return false;" title="Xóa">❌</a></li>`).join('');
-    }
-    function add(){
-      let d=load(), now=new Date(), date=now.toLocaleDateString();
-      d.unshift({date,mood:mood.value,note:note.value});
-      save(d);render();note.value='';
-    }
-    window.del=i=>{let d=load();d.splice(i,1);save(d);render();}
-    render();
-  </script>
 </body>
 </html>
