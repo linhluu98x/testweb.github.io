@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đồng hồ đếm ngược</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{background:#f5f6fa;font-family:'Segoe UI',Arial,sans-serif;}
+    .wrap{max-width:420px;margin:30px auto;background:#fff;border-radius:10px;box-shadow:0 2px 10px #0002;padding:24px 16px;}
+    h1{text-align:center;color:#c2185b;}
+    input{font-size:1em;padding:8px 12px;border:1px solid #ccc;border-radius:5px;width:80px;}
+    button{padding:8px 16px;background:#c2185b;color:#fff;border:none;border-radius:5px;cursor:pointer;margin-left:8px;}
+    button:hover{background:#880e4f;}
+    #display{font-size:2.2em;font-weight:bold;text-align:center;margin-top:20px;}
+    @media(max-width:600px){.wrap{padding:9vw 2vw;}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Đồng hồ đếm ngược</h1>
+    <div style="text-align:center;">
+      <input id="min" type="number" placeholder="Phút" min="0"> :
+      <input id="sec" type="number" placeholder="Giây" min="0" max="59">
+      <button onclick="start()">Bắt đầu</button>
+    </div>
+    <div id="display"></div>
+  </div>
+  <script>
+    let timer;
+    function start(){
+      let m = parseInt(min.value)||0, s = parseInt(sec.value)||0;
+      let total = m*60+s;
+      clearInterval(timer);
+      if(total<=0)return;
+      tick(total);
+      timer = setInterval(()=>{
+        total--;
+        tick(total);
+        if(total<=0) clearInterval(timer);
+      },1000);
+    }
+    function tick(t){
+      let mm = Math.floor(t/60), ss = t%60;
+      display.textContent = (mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chuyển đổi đơn vị</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{background:#f5f6fa;font-family:'Segoe UI',Arial,sans-serif;}
+    .wrap{max-width:420px;margin:30px auto;background:#fff;border-radius:10px;box-shadow:0 2px 10px #0002;padding:24px 16px;}
+    h1{text-align:center;color:#388e3c;}
+    .row{display:flex;gap:8px;margin:12px 0;}
+    input,select{flex:1;padding:8px;font-size:1em;border:1px solid #bbb;border-radius:5px;}
+    .result{margin-top:18px;font-size:1.1em;text-align:center;}
+    @media(max-width:600px){.wrap{padding:9vw 2vw;}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Chuyển đổi đơn vị</h1>
+    <div class="row">
+      <input id="val" type="number" placeholder="Số liệu">
+      <select id="type" onchange="renderUnits()">
+        <option value="length">Chiều dài</option>
+        <option value="weight">Khối lượng</option>
+        <option value="temp">Nhiệt độ</option>
+      </select>
+    </div>
+    <div class="row">
+      <select id="from"></select>
+      <span style="align-self:center;">→</span>
+      <select id="to"></select>
+    </div>
+    <div class="result" id="result"></div>
+  </div>
+  <script>
+    const units = {
+      length: [["m",1],["cm",0.01],["mm",0.001],["km",1000],["in",0.0254],["ft",0.3048]],
+      weight: [["kg",1],["g",0.001],["lb",0.453592],["oz",0.0283495]],
+      temp: [["C",1],["F",1],["K",1]]
+    };
+    function renderUnits(){
+      let u = units[type.value];
+      from.innerHTML = to.innerHTML = u.map(x=>`<option>${x[0]}</option>`).join('');
+      calc();
+    }
+    function calc(){
+      let v = parseFloat(val.value)||0, t=type.value, f=from.value, toV=to.value, r="";
+      if(t==="length"||t==="weight"){
+        let u=units[t], a=u.find(x=>x[0]===f)[1], b=u.find(x=>x[0]===toV)[1];
+        r = (v*a/b).toLocaleString()+" "+toV;
+      }else if(t==="temp"){
+        if(f==="C"&&toV==="F") r=(v*9/5+32)+" °F";
+        else if(f==="F"&&toV==="C") r=((v-32)*5/9)+" °C";
+        else if(f==="C"&&toV==="K") r=(v+273.15)+" K";
+        else if(f==="K"&&toV==="C") r=(v-273.15)+" °C";
+        else if(f==="F"&&toV==="K") r=((v-32)*5/9+273.15)+" K";
+        else if(f==="K"&&toV==="F") r=((v-273.15)*9/5+32)+" °F";
+        else r=v+" "+toV;
+      }
+      result.textContent = r;
+    }
+    val.oninput=calc; from.onchange=calc; to.onchange=calc; type.onchange=renderUnits;
+    renderUnits();
+  </script>
+</body>
+</html>

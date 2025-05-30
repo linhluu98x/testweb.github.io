@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Máy tính sức khỏe (BMI/BMR)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{background:#f5f6fa;font-family:'Segoe UI',Arial,sans-serif;}
+    .wrap{max-width:420px;margin:30px auto;background:#fff;border-radius:10px;box-shadow:0 2px 10px #0002;padding:24px 16px;}
+    h1{text-align:center;color:#00796b;}
+    label{display:block;margin:10px 0 5px;}
+    input,select{width:100%;padding:8px;font-size:1em;border:1px solid #ccc;border-radius:5px;}
+    button{margin-top:14px;background:#00796b;color:#fff;padding:10px 28px;border:none;border-radius:7px;font-size:1em;}
+    button:hover{background:#004d40;}
+    .result{margin-top:18px;font-size:1.15em;text-align:center;}
+    @media(max-width:600px){.wrap{padding:9vw 2vw;}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Máy tính BMI/BMR</h1>
+    <label>Tuổi <input type="number" id="age" min="2"></label>
+    <label>Giới tính 
+      <select id="sex"><option value="male">Nam</option><option value="female">Nữ</option></select>
+    </label>
+    <label>Cân nặng (kg) <input type="number" id="weight" min="1"></label>
+    <label>Chiều cao (cm) <input type="number" id="height" min="30"></label>
+    <button onclick="calc()">Tính</button>
+    <div class="result" id="result"></div>
+  </div>
+  <script>
+    function calc(){
+      let w=+weight.value, h=+height.value/100, a=+age.value, s=sex.value;
+      if(!a||!w||!h)return;
+      let bmi = w/(h*h);
+      let bmr = s==='male'?88.36+13.4*w+4.8*height.value-5.7*a:447.6+9.2*w+3.1*height.value-4.3*a;
+      result.innerHTML=`BMI: <b>${bmi.toFixed(2)}</b> (${bmi<18.5?'Gầy':bmi<24.9?'Bình thường':bmi<29.9?'Thừa cân':'Béo phì'})<br>BMR: <b>${bmr.toFixed(0)} kcal/ngày</b>`;
+    }
+  </script>
+</body>
+</html>

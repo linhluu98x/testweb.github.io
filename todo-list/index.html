@@ -1,29 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>To-do List</title>
-  <script>
-    function addTodo() {
-      const val = document.getElementById('todo').value;
-      if (!val) return;
-      let todos = JSON.parse(localStorage.getItem('todos') || '[]');
-      todos.push(val);
-      localStorage.setItem('todos', JSON.stringify(todos));
-      showTodos();
-      document.getElementById('todo').value = '';
-    }
-    function showTodos() {
-      let todos = JSON.parse(localStorage.getItem('todos') || '[]');
-      document.getElementById('list').innerHTML = todos.map(t => `<li>${t}</li>`).join('');
-    }
-    window.onload = showTodos;
-  </script>
+  <title>Nhắc việc, to-do list</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {background:#f5f6fa;font-family:'Segoe UI',Arial,sans-serif;}
+    .wrap{max-width:420px;margin:30px auto;background:#fff;border-radius:10px;box-shadow:0 2px 10px #0002;padding:24px 16px;}
+    h1{text-align:center;color:#e65100;}
+    .form-row{display:flex;gap:8px;margin-bottom:10px;}
+    .form-row input{flex:1;font-size:1em;padding:8px;border:1px solid #ccc;border-radius:5px;}
+    .form-row button{padding:8px 16px;background:#e65100;color:#fff;border:none;border-radius:5px;cursor:pointer;}
+    .form-row button:hover{background:#bf360c;}
+    ul{list-style:none;padding:0;}
+    li{padding:8px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px dotted #eee;}
+    .done{text-decoration:line-through;color:#aaa;}
+    @media(max-width:600px){.wrap{padding:9vw 2vw;}}
+  </style>
 </head>
 <body>
-  <h1>To-do List</h1>
-  <input id="todo" placeholder="Add new task">
-  <button onclick="addTodo()">Add</button>
-  <ul id="list"></ul>
+  <div class="wrap">
+    <h1>To-do List</h1>
+    <form id="form" class="form-row">
+      <input type="text" id="todo" placeholder="Việc cần làm..." required>
+      <button type="submit">Thêm</button>
+    </form>
+    <ul id="list"></ul>
+  </div>
+  <script>
+    function save(d){localStorage.setItem('todos',JSON.stringify(d));}
+    function load(){return JSON.parse(localStorage.getItem('todos')||'[]');}
+    function render(){let d=load();
+      list.innerHTML=d.map((x,i)=>`<li><span class="${x.done?'done':''}" onclick="toggle(${i})">${x.name}</span><a href="#" onclick="del(${i});return false;" title="Xóa">❌</a></li>`).join('');
+    }
+    form.onsubmit=e=>{
+      e.preventDefault();
+      let d=load();d.push({name:todo.value,done:false});save(d);todo.value='';render();
+    };
+    window.del=i=>{let d=load();d.splice(i,1);save(d);render();}
+    window.toggle=i=>{let d=load();d[i].done=!d[i].done;save(d);render();}
+    render();
+  </script>
 </body>
 </html>

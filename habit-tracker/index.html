@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Theo dõi thói quen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {background: #f5f6fa; font-family: 'Segoe UI', Arial, sans-serif;}
+    .wrap {max-width:420px;margin:30px auto;background:#fff;border-radius:10px;box-shadow:0 2px 10px #0002;padding:24px 16px;}
+    h1 {text-align:center;color:#43a047;}
+    .form-row {display:flex;gap:8px;margin-bottom:10px;}
+    .form-row input {flex:1;font-size:1em;padding:8px;border:1px solid #ccc;border-radius:5px;}
+    .form-row button {padding:8px 16px;background:#43a047;color:#fff;border:none;border-radius:5px;cursor:pointer;}
+    .form-row button:hover {background:#2e7d32;}
+    ul {list-style:none;padding:0;}
+    li {padding:8px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px dotted #eee;}
+    .done {text-decoration:line-through;color:#aaa;}
+    @media(max-width:600px){.wrap{padding:9vw 2vw;}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Habit Tracker</h1>
+    <form id="form" class="form-row">
+      <input type="text" id="habit" placeholder="Thói quen..." required>
+      <button type="submit">Thêm</button>
+    </form>
+    <ul id="list"></ul>
+  </div>
+  <script>
+    function save(d){localStorage.setItem('habits',JSON.stringify(d));}
+    function load(){return JSON.parse(localStorage.getItem('habits')||'[]');}
+    function render(){let d=load();
+      list.innerHTML=d.map((x,i)=>`<li><span class="${x.done?'done':''}" onclick="toggle(${i})">${x.name}</span><a href="#" onclick="del(${i});return false;" title="Xóa">❌</a></li>`).join('');
+    }
+    form.onsubmit=e=>{
+      e.preventDefault();
+      let d=load();d.push({name:habit.value,done:false});save(d);habit.value='';render();
+    };
+    window.del=i=>{let d=load();d.splice(i,1);save(d);render();}
+    window.toggle=i=>{let d=load();d[i].done=!d[i].done;save(d);render();}
+    render();
+  </script>
+</body>
+</html>

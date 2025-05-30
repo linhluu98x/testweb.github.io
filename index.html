@@ -1,33 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Mini App Gallery</title>
+  <title>Life Utilities App Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: Arial, sans-serif; margin: 40px; }
-    h1 { color: #1e90ff; }
-    ul { line-height: 2; }
-    a { text-decoration: none; color: #1e90ff; }
-    a:hover { text-decoration: underline; }
+    html { box-sizing: border-box; }
+    *, *:before, *:after { box-sizing: inherit; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f5f6fa; }
+    .container { max-width: 700px; margin: 0 auto; padding: 32px 12px; }
+    h1 { text-align: center; color: #1976d2; }
+    ul { list-style: none; padding: 0; }
+    li { background: #fff; margin: 12px 0; border-radius: 8px; box-shadow: 0 2px 8px #0001; }
+    a { display: block; padding: 20px; font-size: 1.1em; color: #1976d2; text-decoration: none; transition: background 0.2s; }
+    a:hover { background: #e3f2fd; }
+    @media (max-width: 600px) {
+      .container { padding: 16px 2vw; }
+      a { padding: 14px; font-size: 1em; }
+    }
   </style>
 </head>
 <body>
-  <h1>Mini App Gallery</h1>
-  <ul>
-    <li><a href="portfolio/">Personal Portfolio</a></li>
-	<li><a href="sleep-cycle-calculator/">sleep cycle calculator</a></li>
-    <li><a href="blog/">Static Blog</a></li>
-    <li><a href="gallery/">Photo Gallery</a></li>
-    <li><a href="product-landing/">Product Landing Page</a></li>
-    <li><a href="contact-form/">Contact Form (EmailJS)</a></li>
-    <li><a href="cv-online/">Online CV</a></li>
-    <li><a href="countdown/">Countdown Timer</a></li>
-    <li><a href="todo-list/">To-do List</a></li>
-    <li><a href="resume-generator/">Resume Generator</a></li>
-    <li><a href="calculator/">Calculator/Converter</a></li>
-    <li><a href="mini-game/">Mini Game/Quiz</a></li>
-    <li><a href="faq/">FAQ / Product Guide</a></li>
-  </ul>
-  <footer style="margin-top:40px;">&copy; 2025 Mini App Gallery by linhluu98x</footer>
+  <div class="container">
+    <h1>Life Utilities App Gallery</h1>
+    <ul>
+      <li><a href="pomodoro/">Lập kế hoạch Pomodoro</a></li>
+      <li><a href="quick-notes/">Ghi chú nhanh</a></li>
+      <li><a href="sleep-cycle/">Tính giờ ngủ khoa học</a></li>
+      <li><a href="expense-tracker/">Quản lý chi tiêu cá nhân</a></li>
+      <li><a href="habit-tracker/">Theo dõi thói quen</a></li>
+      <li><a href="simple-passwords/">Quản lý mật khẩu đơn giản</a></li>
+      <li><a href="calorie-log/">Nhật ký thực phẩm/Calories</a></li>
+      <li><a href="step-tracker/">Nhật ký bước chân</a></li>
+      <li><a href="countdown-timer/">Đồng hồ đếm ngược/Đặt giờ</a></li>
+      <li><a href="todo-list/">Nhắc việc, to-do list</a></li>
+      <li><a href="unit-converter/">Chuyển đổi đơn vị</a></li>
+      <li><a href="health-calculator/">Máy tính sức khỏe (BMI/BMR)</a></li>
+      <li><a href="qr-generator/">Tạo mã QR nhanh</a></li>
+      <li><a href="mood-tracker/">Theo dõi cảm xúc</a></li>
+      <li><a href="water-reminder/">Lịch nhắc uống nước</a></li>
+    </ul>
+    <footer style="margin-top:40px;text-align:center;color:#aaa;">&copy; 2025 Life Utilities by linhluu98x</footer>
+  </div>
 </body>
 </html>

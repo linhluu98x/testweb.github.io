@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản lý mật khẩu đơn giản</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{background:#f5f6fa;font-family:'Segoe UI',Arial,sans-serif;}
+    .wrap{max-width:420px;margin:30px auto;background:#fff;border-radius:10px;box-shadow:0 2px 10px #0002;padding:24px 16px;}
+    h1{text-align:center;color:#283593;}
+    .form-row{display:flex;gap:8px;margin-bottom:10px;}
+    .form-row input{flex:1;font-size:1em;padding:8px;border:1px solid #ccc;border-radius:5px;}
+    .form-row button{padding:8px 16px;background:#283593;color:#fff;border:none;border-radius:5px;cursor:pointer;}
+    .form-row button:hover{background:#1a237e;}
+    ul{list-style:none;padding:0;}
+    li{padding:8px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px dotted #eee;}
+    .pass{font-family:monospace;}
+    @media(max-width:600px){.wrap{padding:9vw 2vw;}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Mật khẩu cá nhân</h1>
+    <form id="form" class="form-row">
+      <input type="text" id="site" placeholder="Tên dịch vụ" required>
+      <input type="text" id="pw" placeholder="Mật khẩu" required>
+      <button type="submit">Lưu</button>
+    </form>
+    <ul id="list"></ul>
+  </div>
+  <script>
+    function save(d){localStorage.setItem('passwords',btoa(unescape(encodeURIComponent(JSON.stringify(d)))));}
+    function load(){try{return JSON.parse(decodeURIComponent(escape(atob(localStorage.getItem('passwords')||''))));}catch(_){return[];}}
+    function render(){let d=load();
+      list.innerHTML=d.map((x,i)=>`<li><span>${x.site}</span><span class="pass">${x.pw}</span><a href="#" onclick="del(${i});return false;" title="Xóa">❌</a></li>`).join('');
+    }
+    form.onsubmit=e=>{
+      e.preventDefault();
+      let d=load();d.push({site:site.value,pw:pw.value});save(d);site.value='';pw.value='';render();
+    };
+    window.del=i=>{let d=load();d.splice(i,1);save(d);render();}
+    render();
+  </script>
+</body>
+</html>
