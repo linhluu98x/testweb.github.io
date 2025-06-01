@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-# Danh sách app phổ biến (full code) và app đặc thù (khung)
 declare -A apps
 apps=(
   [expense-tracker]="Quản lý chi tiêu cá nhân|Theo dõi thu/chi, tổng kết và lưu lịch sử chi tiêu cá nhân."
@@ -24,20 +23,6 @@ apps=(
   [stopwatch]="Đồng hồ bấm giờ|Đo thời gian sự kiện, bấm giờ thể thao."
   [tip-split]="Tính tiền tip/chia hóa đơn|Tính tiền tip và chia hóa đơn cho nhóm."
   [color-converter]="Bảng chuyển đổi màu sắc|Đổi mã màu HEX, RGB, HSL, xem bảng màu."
-  # Các app đặc thù (chỉ khung giao diện đẹp, dễ mở rộng)
-  [calendar]="Lịch/thời khóa biểu cá nhân|Quản lý sự kiện, thời khóa biểu cá nhân, lịch học/làm việc."
-  [medication-reminder]="Nhắc uống thuốc|Đặt lịch nhắc uống thuốc, nhắc lịch khám sức khỏe."
-  [document-safe]="Lưu trữ tài liệu quan trọng|Lưu thông tin giấy tờ, hình ảnh quan trọng (offline/local)."
-  [password-generator]="Tạo mật khẩu mạnh|Sinh mật khẩu ngẫu nhiên, an toàn."
-  [postal-lookup]="Tra cứu mã bưu điện|Tìm mã bưu điện, mã vùng nhanh chóng."
-  [world-clock]="Đồng hồ thế giới|Xem giờ các quốc gia lớn, tiện cho làm việc quốc tế."
-  [timezone-converter]="Chuyển đổi múi giờ|Đổi giờ giữa các quốc gia, giờ quốc tế và giờ VN."
-  [encrypted-notes]="Ghi chú mã hóa|Ghi chú bảo mật, chỉ ai có mật khẩu mới đọc được."
-  [shipping-fee]="Tính phí gửi hàng|Tính chi phí gửi hàng nhanh, phù hợp bán hàng online."
-  [book-movie-journal]="Nhật ký sách/phim|Lưu lại sách đã đọc, phim đã xem, đánh giá, chia sẻ."
-  [currency-rate]="Tỷ giá ngoại tệ|Tra cứu tỷ giá USD, EUR, JPY, ... mới nhất."
-  [special-date-reminder]="Nhắc ngày đặc biệt|Lưu ngày sinh nhật, kỷ niệm, nhắc trước ngày quan trọng."
-  [age-calculator]="Tính tuổi/ngày|Nhập ngày sinh, tính tuổi hoặc đếm ngược đến ngày kỷ niệm."
 )
 
 # Trang chủ
@@ -92,53 +77,187 @@ cat >> index.html <<EOF
 </html>
 EOF
 
-# Tạo từng app: phổ biến thì full code, đặc thù thì khung đẹp
-for dir in "${!apps[@]}"; do
-  mkdir -p "$dir"
-  name="${apps[$dir]%%|*}"
-  desc="${apps[$dir]#*|}"
-  # Full code cho các app phổ biến (ví dụ expense-tracker, todo-list, habit-tracker,...)
-  case "$dir" in
-    expense-tracker|habit-tracker|todo-list|quick-notes|countdown-timer|pomodoro|health-calculator|sleep-cycle|water-reminder|unit-converter|qr-generator|step-tracker|simple-passwords|mood-tracker|calorie-log|shopping-list|goal-setter|stopwatch|tip-split|color-converter)
-      # (phần code cho từng app này đã được gửi ở các reply bên trên và sẽ được GHÉP ĐẦY ĐỦ trong file này, mỗi app là một khối HTML hoàn chỉnh, thực tế)
-      # Để tiết kiệm không gian ở đây, bạn chỉ cần chèn từng đoạn mã HTML app hoàn chỉnh vào case tương ứng.
-      # Ví dụ:
-      # if [[ "$dir" == "expense-tracker" ]]; then ... mã HTML app expense-tracker ... fi
-      # ... (tương tự cho các app khác)
-      # (Xem các reply trước đã cung cấp code từng app phổ biến, bạn chỉ cần ghép lại)
-      ;;
-    *)
-      # App đặc thù - chỉ tạo khung giao diện đẹp, mô tả rõ ràng
-      cat > $dir/index.html <<EOF
+# App 1: Quản lý chi tiêu cá nhân
+mkdir -p expense-tracker
+cat > expense-tracker/index.html <<'EOF'
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>$name - Life Suite</title>
+  <title>Quản lý chi tiêu cá nhân - Life Suite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {background:#e3eafc;font-family:'Segoe UI',Arial,sans-serif;margin:0;}
-    .wrap{max-width:430px;margin:30px auto;background:#fff;border-radius:15px;box-shadow:0 2px 15px #0002;padding:28px 16px;}
-    h1{text-align:center;color:#1976d2;font-size:1.38em;}
-    .desc{color:#555;text-align:center;margin-bottom:22px;}
-    .coming{color:#888;text-align:center;margin-top:35px;}
-    @media(max-width:600px){.wrap{padding:9vw 2vw;}}
+    body { background:#f4f6fb; margin:0; font-family:'Segoe UI',Arial,sans-serif;}
+    .wrap { max-width:430px; margin:36px auto; background:#fff; border-radius:12px; box-shadow:0 2px 14px #0001; padding:28px 18px;}
+    h1 { text-align:center; color:#1976d2; margin:12px 0 16px 0; }
+    .form-row { display: flex; gap: 8px; margin-bottom: 14px;}
+    .form-row input { flex:1; font-size:1.05em; padding:8px; border:1px solid #ccc; border-radius:5px;}
+    .form-row button { padding:8px 16px; background:#1976d2; color:#fff; border:none; border-radius:5px; cursor:pointer;}
+    .form-row button:hover { background:#1565c0;}
+    ul {list-style:none;padding:0;margin:0;}
+    li {padding:9px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px dotted #eee;}
+    .sum { font-weight:bold; color:#1976d2; text-align:right; margin-top:10px;}
+    .desc{color:#555;text-align:center;margin-bottom:14px;}
+    .del{color:#e53935;text-decoration:none;font-size:1.1em;margin-left:10px;}
+    @media(max-width:600px){.wrap{padding:7vw 2vw;}}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>$name</h1>
-    <div class="desc">$desc</div>
-    <div class="coming">Tính năng này sẽ được bổ sung sớm!</div>
-    <div style="text-align:center;margin:35px 0 0 0;">
-      <a href="../" style="color:#1976d2;text-decoration:none;font-size:.99em;">&larr; Về trang chủ</a>
+    <h1>Quản lý chi tiêu</h1>
+    <div class="desc">Theo dõi thu/chi, tổng kết và lưu lịch sử chi tiêu cá nhân.</div>
+    <form id="form" class="form-row" autocomplete="off">
+      <input type="text" id="desc" placeholder="Mô tả" required>
+      <input type="number" id="amount" placeholder="Số tiền" required>
+      <button type="submit">Thêm</button>
+    </form>
+    <ul id="list"></ul>
+    <div class="sum" id="total">Tổng: 0 đ</div>
+    <div style="text-align:center;margin-top:28px;">
+      <a href="../" style="color:#1976d2;text-decoration:none;font-size:.97em;">&larr; Về trang chủ</a>
     </div>
   </div>
+  <script>
+    function save(data){localStorage.setItem('expenses',JSON.stringify(data));}
+    function load(){return JSON.parse(localStorage.getItem('expenses')||'[]');}
+    function render(){let d=load(),s=0;
+      list.innerHTML=d.map((x,i)=>`<li>${x.desc}<span>${parseInt(x.amount).toLocaleString()} đ
+      <a href="#" class="del" onclick="del(${i});return false;" title="Xóa">🗑</a></span></li>`).join('');
+      d.forEach(x=>s+=+x.amount);
+      total.textContent='Tổng: '+s.toLocaleString()+' đ';
+    }
+    form.onsubmit=e=>{
+      e.preventDefault();
+      let d=load(); d.push({desc:desc.value,amount:amount.value}); save(d); render();
+      desc.value=''; amount.value=''; desc.focus();
+    };
+    window.del=i=>{let d=load();d.splice(i,1);save(d);render();}
+    render();
+  </script>
 </body>
 </html>
 EOF
-      ;;
-  esac
-done
 
-echo "🎉 Đã tạo xong Life Suite với các app phổ biến đầy đủ tính năng, giao diện đẹp, và các app đặc thù có khung sẵn sàng mở rộng!"
+# App 2: Theo dõi thói quen
+mkdir -p habit-tracker
+cat > habit-tracker/index.html <<'EOF'
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Theo dõi thói quen - Life Suite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {background:#f4f6fb;font-family:'Segoe UI',Arial,sans-serif;}
+    .wrap {max-width:430px;margin:36px auto;background:#fff;border-radius:12px;box-shadow:0 2px 14px #0001;padding:28px 18px;}
+    h1 {text-align:center;color:#43a047;}
+    .desc{color:#555;text-align:center;margin-bottom:14px;}
+    .form-row {display:flex;gap:8px;margin-bottom:12px;}
+    .form-row input {flex:1;font-size:1.05em;padding:8px;border:1px solid #ccc;border-radius:5px;}
+    .form-row button {padding:8px 16px;background:#43a047;color:#fff;border:none;border-radius:5px;cursor:pointer;}
+    .form-row button:hover {background:#2e7d32;}
+    ul {list-style:none;padding:0;margin:0;}
+    li {padding:8px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px dotted #eee;}
+    .done {text-decoration:line-through;color:#aaa;}
+    .del{color:#e53935;text-decoration:none;font-size:1.1em;margin-left:10px;}
+    @media(max-width:600px){.wrap{padding:7vw 2vw;}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Theo dõi thói quen</h1>
+    <div class="desc">Tạo và đánh dấu các thói quen tích cực mỗi ngày.</div>
+    <form id="form" class="form-row" autocomplete="off">
+      <input type="text" id="habit" placeholder="Tên thói quen..." required>
+      <button type="submit">Thêm</button>
+    </form>
+    <ul id="list"></ul>
+    <div style="text-align:center;margin-top:28px;">
+      <a href="../" style="color:#1976d2;text-decoration:none;font-size:.97em;">&larr; Về trang chủ</a>
+    </div>
+  </div>
+  <script>
+    function save(d){localStorage.setItem('habits',JSON.stringify(d));}
+    function load(){return JSON.parse(localStorage.getItem('habits')||'[]');}
+    function render(){let d=load();
+      list.innerHTML=d.map((x,i)=>`<li>
+      <span class="${x.done?'done':''}" onclick="toggle(${i})" style="cursor:pointer">${x.name}</span>
+      <a href="#" class="del" onclick="del(${i});return false;" title="Xóa">🗑</a>
+      </li>`).join('');
+    }
+    form.onsubmit=e=>{
+      e.preventDefault();
+      let d=load();d.push({name:habit.value,done:false});save(d);habit.value='';render();
+    };
+    window.del=i=>{let d=load();d.splice(i,1);save(d);render();}
+    window.toggle=i=>{let d=load();d[i].done=!d[i].done;save(d);render();}
+    render();
+  </script>
+</body>
+</html>
+EOF
+
+# App 3: Nhắc việc, to-do list
+mkdir -p todo-list
+cat > todo-list/index.html <<'EOF'
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>To-do List - Life Suite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {background:#f4f6fb;font-family:'Segoe UI',Arial,sans-serif;}
+    .wrap{max-width:430px;margin:36px auto;background:#fff;border-radius:12px;box-shadow:0 2px 14px #0001;padding:28px 18px;}
+    h1{text-align:center;color:#e65100;}
+    .desc{color:#555;text-align:center;margin-bottom:14px;}
+    .form-row{display:flex;gap:8px;margin-bottom:12px;}
+    .form-row input{flex:1;font-size:1.05em;padding:8px;border:1px solid #ccc;border-radius:5px;}
+    .form-row button{padding:8px 16px;background:#e65100;color:#fff;border:none;border-radius:5px;cursor:pointer;}
+    .form-row button:hover{background:#bf360c;}
+    ul{list-style:none;padding:0;margin:0;}
+    li{padding:8px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px dotted #eee;}
+    .done{text-decoration:line-through;color:#aaa;}
+    .del{color:#e53935;text-decoration:none;font-size:1.1em;margin-left:10px;}
+    @media(max-width:600px){.wrap{padding:7vw 2vw;}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>To-do List</h1>
+    <div class="desc">Lập danh sách việc cần làm, đánh dấu hoàn thành từng mục.</div>
+    <form id="form" class="form-row" autocomplete="off">
+      <input type="text" id="todo" placeholder="Việc cần làm..." required>
+      <button type="submit">Thêm</button>
+    </form>
+    <ul id="list"></ul>
+    <div style="text-align:center;margin-top:28px;">
+      <a href="../" style="color:#1976d2;text-decoration:none;font-size:.97em;">&larr; Về trang chủ</a>
+    </div>
+  </div>
+  <script>
+    function save(d){localStorage.setItem('todos',JSON.stringify(d));}
+    function load(){return JSON.parse(localStorage.getItem('todos')||'[]');}
+    function render(){let d=load();
+      list.innerHTML=d.map((x,i)=>`<li>
+      <span class="${x.done?'done':''}" onclick="toggle(${i})" style="cursor:pointer">${x.name}</span>
+      <a href="#" class="del" onclick="del(${i});return false;" title="Xóa">🗑</a>
+      </li>`).join('');
+    }
+    form.onsubmit=e=>{
+      e.preventDefault();
+      let d=load();d.push({name:todo.value,done:false});save(d);todo.value='';render();
+    };
+    window.del=i=>{let d=load();d.splice(i,1);save(d);render();}
+    window.toggle=i=>{let d=load();d[i].done=!d[i].done;save(d);render();}
+    render();
+  </script>
+</body>
+</html>
+EOF
+
+# ... (Các app phổ biến tiếp theo: quick-notes, countdown-timer, pomodoro, ... bạn tiếp tục làm tương tự!)
+
+# ===> Do giới hạn ký tự, mình sẽ gửi tiếp các app còn lại (quick-notes, countdown-timer, pomodoro, health-calculator, sleep-cycle, water-reminder, unit-converter, qr-generator, step-tracker, simple-passwords, mood-tracker, calorie-log, shopping-list, goal-setter, stopwatch, tip-split, color-converter) ở các reply tiếp theo.  
+**Bạn chỉ cần ghép lại toàn bộ là thành trọn bộ script hoàn chỉnh.**  
+Nếu muốn nhận từng app HTML riêng lẻ, hãy yêu cầu từng app cụ thể.
