@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Ghi chú nhanh - Life Suite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{background:#f4f6fb;font-family:'Segoe UI',Arial,sans-serif;}
+    .wrap{max-width:430px;margin:36px auto;background:#fff;border-radius:12px;box-shadow:0 2px 14px #0001;padding:28px 18px;}
+    h1{text-align:center;color:#5e35b1;}
+    .desc{color:#555;text-align:center;margin-bottom:14px;}
+    textarea{width:100%;height:140px;font-size:1.09em;padding:12px;border-radius:7px;border:1px solid #bbb;}
+    button{margin-top:14px;background:#5e35b1;color:#fff;padding:10px 28px;border:none;border-radius:7px;font-size:1em;}
+    button:hover{background:#4527a0;}
+    @media(max-width:600px){.wrap{padding:7vw 2vw;}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Ghi chú nhanh</h1>
+    <div class="desc">Ghi chú ý tưởng, công việc hoặc thông tin quan trọng, lưu trữ ngay trên thiết bị.</div>
+    <textarea id="note" placeholder="Viết ghi chú..."></textarea>
+    <button onclick="save()">Lưu</button>
+    <div style="text-align:center;margin-top:28px;">
+      <a href="../" style="color:#1976d2;text-decoration:none;font-size:.97em;">&larr; Về trang chủ</a>
+    </div>
+  </div>
+  <script>
+    note.value=localStorage.getItem('quick_note')||'';
+    function save(){localStorage.setItem('quick_note',note.value);}
+    note.oninput=save;
+  </script>
+</body>
+</html>

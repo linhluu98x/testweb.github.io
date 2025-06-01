@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>To-do List - Life Suite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {background:#f4f6fb;font-family:'Segoe UI',Arial,sans-serif;}
+    .wrap{max-width:430px;margin:36px auto;background:#fff;border-radius:12px;box-shadow:0 2px 14px #0001;padding:28px 18px;}
+    h1{text-align:center;color:#e65100;}
+    .desc{color:#555;text-align:center;margin-bottom:14px;}
+    .form-row{display:flex;gap:8px;margin-bottom:12px;}
+    .form-row input{flex:1;font-size:1.05em;padding:8px;border:1px solid #ccc;border-radius:5px;}
+    .form-row button{padding:8px 16px;background:#e65100;color:#fff;border:none;border-radius:5px;cursor:pointer;}
+    .form-row button:hover{background:#bf360c;}
+    ul{list-style:none;padding:0;margin:0;}
+    li{padding:8px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px dotted #eee;}
+    .done{text-decoration:line-through;color:#aaa;}
+    .del{color:#e53935;text-decoration:none;font-size:1.1em;margin-left:10px;}
+    @media(max-width:600px){.wrap{padding:7vw 2vw;}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>To-do List</h1>
+    <div class="desc">Lập danh sách việc cần làm, đánh dấu hoàn thành từng mục.</div>
+    <form id="form" class="form-row" autocomplete="off">
+      <input type="text" id="todo" placeholder="Việc cần làm..." required>
+      <button type="submit">Thêm</button>
+    </form>
+    <ul id="list"></ul>
+    <div style="text-align:center;margin-top:28px;">
+      <a href="../" style="color:#1976d2;text-decoration:none;font-size:.97em;">&larr; Về trang chủ</a>
+    </div>
+  </div>
+  <script>
+    function save(d){localStorage.setItem('todos',JSON.stringify(d));}
+    function load(){return JSON.parse(localStorage.getItem('todos')||'[]');}
+    function render(){let d=load();
+      list.innerHTML=d.map((x,i)=>`<li>
+      <span class="${x.done?'done':''}" onclick="toggle(${i})" style="cursor:pointer">${x.name}</span>
+      <a href="#" class="del" onclick="del(${i});return false;" title="Xóa">🗑</a>
+      </li>`).join('');
+    }
+    form.onsubmit=e=>{
+      e.preventDefault();
+      let d=load();d.push({name:todo.value,done:false});save(d);todo.value='';render();
+    };
+    window.del=i=>{let d=load();d.splice(i,1);save(d);render();}
+    window.toggle=i=>{let d=load();d[i].done=!d[i].done;save(d);render();}
+    render();
+  </script>
+</body>
+</html>
